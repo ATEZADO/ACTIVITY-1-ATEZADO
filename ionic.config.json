@@ -1,0 +1,7 @@
+{
+  "name": "pwa-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
