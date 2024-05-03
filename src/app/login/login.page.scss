@@ -1,0 +1,27 @@
+.LOGIN a {
+    text-decoration: none;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    border-style: solid;
+
+    padding: 6px;
+    text-align: center;
+}
+
+.LOGIN ion-item{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: 0;
+    padding: 1%;
+}
+
+.LOGIN ion-label{
+    margin: 0;
+    padding: -5%;
+}
+
+.LOGIN {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
