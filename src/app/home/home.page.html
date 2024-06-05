@@ -1,0 +1,25 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      ACTIVITY 4
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">ACTIVITY 4</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+    <strong>SELECT BUTTON<br></strong>
+    <ion-button (click)="clickAuthenticate()">Authenticate</ion-button><br>
+    <ion-button (click)="clickUnauthenticate()">Unauthenticate</ion-button><br>
+    <ion-button (click)="showObject()">Show Object</ion-button><br>
+    <div *ngIf="isLoading"> {{loadingText}} </div>
+    <div *ngIf="isHide"><p>{{myArray}}</p></div>
+    <ion-button (click)="addObject()">Add to Object</ion-button><br>
+  </div>
+</ion-content>
