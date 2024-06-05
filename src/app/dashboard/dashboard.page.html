@@ -1,0 +1,57 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <div class="dashboard">
+      <h3>DASHBOARD</h3>
+      <div>
+        <ion-button fill="clear" (click)="toggleModal()" class="dashbtn">
+          <ion-icon name="settings" class="setting"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-header>
+        WELCOME TO THE DASHBOARD
+    </ion-card-header>
+  </ion-card>
+  
+  <div class="shows">
+    <div class="title-show">
+        <h3>VEHICLE COMPANY</h3>
+    </div>
+    <div class="list-show">
+      <div class="content" *ngFor="let vehicle of vehicles; let i = index;">
+        <div *ngIf="i < 100">
+          {{i+1}}: ID : {{ vehicle.Make_ID }} - Manufacture : {{ vehicle.Make_Name }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="log-out-btn">
+    <ion-fab-button (click)="logOut()">
+      <ion-icon name="log-out" color="dark"></ion-icon>
+    </ion-fab-button>
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+        <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+        <ion-fab-button>
+            <ion-icon name="logo-facebook"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button>
+            <ion-icon name="logo-twitter"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button>
+            <ion-icon name="logo-instagram"></ion-icon>
+        </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>

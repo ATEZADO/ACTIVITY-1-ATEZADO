@@ -1,0 +1,46 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button default-href="" (click)="closeModal()"></ion-back-button>
+      </ion-buttons>
+    <ion-title class= "top">
+      SETTINGS
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="darkmode">
+      <div class="title">
+          <h3>Notification</h3>
+      </div>
+      <div>
+          <ion-toggle [(ngModel)]="condition" class="darkmode-btn"></ion-toggle><br>
+      </div>
+  </div>
+
+  <div class="volume">
+      <div class="title">
+          <h3>Volume</h3>
+      </div>
+      <div class="volume-slider">
+          <custom-slider></custom-slider>
+      </div>
+  </div>
+
+  <div class="container">
+      <div class="btn">
+        <h5>BUTTON</h5>
+        <ion-button color="primary">Primary Button</ion-button><br>
+        <ion-button color="secondary">Secondary Button</ion-button><br>
+        <ion-button color="danger">Danger Button</ion-button><br>
+      </div>
+  
+      <div class="component-btn">
+        <h5>ALERT</h5>
+        <ion-button color="primary" (click)="alert()">Alert</ion-button>
+      
+        <h5>TOAST</h5>
+        <ion-button color="primary" (click)="presentToast()">Present Toast</ion-button><br>
+      </div>
+    </div>
+</ion-content>
