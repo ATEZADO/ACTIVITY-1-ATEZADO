@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { AuthenticationService } from './authentication.service';
+import { AuthenticationService } from '../app/authentication.service';
 
 const routes: Routes = [
   {
     path: 'home',
-    canActivate:[AuthenticationService],
+    canActivate: [AuthenticationService],
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {
@@ -23,12 +23,15 @@ const routes: Routes = [
   },
   {
     path: 'create',
+    canActivate: [AuthenticationService],
     loadChildren: () => import('./create/create.module').then( m => m.CreatePageModule)
   },
   {
-    path: 'update',
+    path: 'update/:id',
     loadChildren: () => import('./update/update.module').then( m => m.UpdatePageModule)
   },
+
+
 ];
 
 @NgModule({

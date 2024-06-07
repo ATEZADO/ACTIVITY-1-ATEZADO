@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../authentication.service';
-import { AlertController } from '@ionic/angular';
-import { User, iUser } from './home.model';
-import { HomeService } from './home.service';
+import { Router } from '@angular/router';
+import { iUser, User } from './home.model';
+import { LoadingController } from '@ionic/angular';
+
+
 
 @Component({
   selector: 'app-home',
@@ -11,57 +12,51 @@ import { HomeService } from './home.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  user: User = new User();
-  userList: iUser[]=[];
-  isLoading: boolean = false;
-  
+  userList: iUser[] = [];
+  users: User = new User();
+  constructor(private auth: AuthenticationService, private router: Router, private loadController: LoadingController) {
+  }
 
-  constructor(private authentication:AuthenticationService, private router:Router, 
-              private alertController: AlertController, private homeService: HomeService) {}
+  ionViewWillEnter() {
+    this.user();
+  }
 
-  signOut() {
+  logOut() {
     this.router.navigate(['login']);
-    this.authentication.setAuthentication(false);
+    this.auth.setAuthentication(false);
   }
 
-  async presentAlert(header: string, message: string) {
-    const alert = await this.alertController.create({
-      header: header,
-      message: message,
-      buttons: ['OK']
-    });
-
-    await alert.present(); 
-    
+  update(user: User) {
+    this.router.navigate(['update', user.id]);
+    this.auth.newUserList = this.userList;
+    this.auth.edit(user);
+    console.log(this.userList);
   }
 
-  save(){
-    if (this.user.id) {
-      this.homeService.tryUpdate(this.user);
-      this.presentAlert('Update', 'User Updated');
-    } else {
-      this.homeService.tryAdd(this.user);
-      this.presentAlert('Success', 'User Added');
-    }
-    this.user = new User();
-    this.users();
+  addUser() {
+    this.router.navigate(['create']);
   }
 
-  async users() {
-    this.isLoading = true;
-    this.userList = await this.homeService.getUsers();
-    this.isLoading = false;
-  }
-  edit(user: iUser) {
-    this.user = user;
+  async user() {
+    this.auth.isLoading = true;
+    this.userList = await this.auth.getUsers();
+    this.auth.newUserList = this.userList;
+    this.auth.isLoading = false;
   }
 
   async delete(user: User) {
-    this.isLoading = true;
-    await this.homeService.tryDelete(user);
-    this.presentAlert('Delete', 'User Deleted');
-    this.users();
-    this.user = new User();
-    this.isLoading = false;
+    const confirmDelete = confirm('Are you sure you want to delete this movie?');
+  
+    if (!confirmDelete) {
+      return; 
+    }
+  
+    this.auth.isLoading = true;
+    await this.auth.deleteUser(user);
+    this.auth.presentAlert('SUCCESS', 'DELETED SUCCESSFULLY');
+    this.user();
+    this.users = new User();
+    this.auth.isLoading = false;
   }
+  
 }
